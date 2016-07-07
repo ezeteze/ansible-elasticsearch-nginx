@@ -1,0 +1,8 @@
+---
+# Elasticsearch Ansible Playbook
+- hosts: all
+  user: root
+ 
+  roles:
+    - java	
+    - elasticsearch

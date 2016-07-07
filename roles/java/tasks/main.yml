@@ -1,0 +1,22 @@
+---
+- name: WebUpd8 apt repo
+  apt_repository:
+    repo='ppa:webupd8team/java'
+    update_cache=yes
+
+- name: Check Oracle license
+  shell:
+    /usr/bin/debconf-show oracle-java8-installer |awk '/accepted-oracle-license/{print $NF}'
+  changed_when: False
+  register: webupd8team
+
+- name: Accept Oracle license
+  shell:
+    echo 'oracle-java8-installer shared/accepted-oracle-license-v1-1 select true' | /usr/bin/debconf-set-selections
+  when: webupd8team.stdout != 'true'
+
+- name: Java apt packages
+  apt: pkg={{ item }} update_cache=yes state=present
+  with_items:
+    - oracle-java8-installer
+    - oracle-java8-set-default 
