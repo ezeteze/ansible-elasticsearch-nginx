@@ -1,13 +1,12 @@
 ---
 - name: Add elasticsearch repo key.
-  apt_key: id=D88E42B4 url=https://packages.elasticsearch.org/GPG-KEY-elasticsearch state=present validate_certs=no
+  apt_key: id=D88E42B4 url=https://packages.elastic.co/GPG-KEY-elasticsearch state=present validate_certs=no
 
 - name: Add elasticsearch repo.
   apt_repository:
-    repo="deb http://packages.elasticsearch.org/elasticsearch/{{ elasticsearch.version }}/{{ ansible_os_family|lower }} stable main"
+    repo="deb http://packages.elastic.co/elasticsearch/2.x/{{ ansible_os_family|lower }} stable main"
     update_cache=yes
 
 - name: Install elasticsearch from repo.
   apt: pkg=elasticsearch update_cache=yes state=latest
-  sudo: yes
   notify: Restart elasticsearch
