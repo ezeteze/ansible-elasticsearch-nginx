@@ -21,7 +21,10 @@
     path=/opt/kibana
     state=directory
     owner=kibana group=kibana recurse=yes
-#  changed_when: False
+
+- name: Upload kibana config
+  template: src=kibana.yml.j2 dest=/opt/kibana/config/kibana.yml
+  notify: restart kibana
 
 - name: Start Kibana service
   service: name=kibana state=started enabled=yes
