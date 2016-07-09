@@ -1,0 +1,27 @@
+---    
+- name: Register Kibana apt key
+  apt_key: url="https://packages.elastic.co/GPG-KEY-elasticsearch" state=present
+
+- name: Install Kibana apt repository
+  apt_repository: repo="{{ kibana_apt_repository }}" update_cache=yes state=present
+
+- name: Install Kibana packages
+  package: name={{ item }} state=present
+  with_items: "{{ kibana_packages }}"
+
+- name: install Marvel plugin
+  shell: bin/kibana plugin --install elasticsearch/marvel/latest
+    chdir=/opt/kibana/
+  register: marvel_plugin_installed
+  changed_when: "'Installed' in marvel_plugin_installed.stdout"
+  failed_when: "marvel_plugin_installed.rc != 0 and marvel_plugin_installed.stderr.find('marvel already exists, please remove before installing a new version') == -1"
+
+- name: Kibana files ownership
+  file:
+    path=/opt/kibana
+    state=directory
+    owner=kibana group=kibana recurse=yes
+#  changed_when: False
+
+- name: Start Kibana service
+  service: name=kibana state=started enabled=yes

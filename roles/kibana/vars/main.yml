@@ -1,0 +1,8 @@
+---
+kibana_apt_repository: 'deb http://packages.elastic.co/kibana/{{ kibana_version[:3] }}/debian stable main'
+kibana_packages:
+    - 'kibana={{ kibana_version }}'
+kibana_version: 4.5.2
+kibana_port: 5601
+kibana_allowed_addresses:
+  -  0.0.0.0
