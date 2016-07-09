@@ -11,6 +11,8 @@
 - name: Install Nginx apt package
   apt: pkg=nginx state=latest
 
+- name: Install python-passlib
+  apt: pkg=python-passlib state=latest  
 - name: Disable default servers
   file:
     path=/etc/nginx/conf.d/{{ item.path }}
@@ -19,6 +21,17 @@
     - { path: 'default.conf' }
     - { path: 'example_ssl.conf' }
 
+- name: Password protect elastic cluster
+  htpasswd: path=/etc/nginx/conf.d/es_passwd name={{ item.key }} password={{ item.value.password }}  owner=nginx group=nginx mode=0640
+  with_dict: "{{ users }}"
+  tags:
+    - nginx_conf
+  
 - name: Upload nginx config
-  template: src=es-lb.j2 dest=/etc/nginx/conf.d/es-lb.conf
+  template: src={{ item }} dest=/etc/nginx/conf.d/{{item}}.conf
+  with_items:
+    - es-lb
+    - kibana-default
   notify: Restart nginx
+  tags:  
+    - nginx_conf  

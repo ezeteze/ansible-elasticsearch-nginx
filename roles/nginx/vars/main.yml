@@ -2,3 +2,9 @@
 nginx:
   user: nginx
   group: nginx
+
+users:
+  elastic:
+    password: elastic
+  kibana:
+    password: kibana
