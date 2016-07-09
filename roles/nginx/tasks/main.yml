@@ -1,9 +1,24 @@
-# file: nginx/tasks/main.yml
+---
+- name: Add nginx apt key
+  apt_key:
+    url='http://nginx.org/keys/nginx_signing.key'
 
-- include: package.yml
-- include: scripts.yml
-- include: configure.yml
-- include: default_site.yml
-- include: sites.yml
-- include: monit.yml
-  when: monit_protection is defined and monit_protection == true
+- name: Add nginx apt repo
+  apt_repository:
+    repo="deb http://nginx.org/packages/{{ ansible_lsb.id|lower }}/ {{ ansible_lsb.codename }} nginx"
+    update_cache=yes
+  
+- name: Install Nginx apt package
+  apt: pkg=nginx state=latest
+
+- name: Disable default servers
+  file:
+    path=/etc/nginx/conf.d/{{ item.path }}
+    state=absent
+  with_items:
+    - { path: 'default.conf' }
+    - { path: 'example_ssl.conf' }
+
+- name: Upload nginx config
+  template: src=es-lb.j2 dest=/etc/nginx/conf.d/es-lb.conf
+  notify: Restart nginx

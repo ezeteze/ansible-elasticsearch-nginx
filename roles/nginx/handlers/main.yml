@@ -1,8 +1,5 @@
-# file: nginx/handlers/main.yml
-
-- name: restart nginx
-  service: name=nginx state=restarted
-  when: not nginx_first_start.changed
-
-- name: reload nginx
-  service: name=nginx state=reloaded
+---
+- name: Restart nginx
+  service:
+    name=nginx
+    enabled=yes state=restarted
