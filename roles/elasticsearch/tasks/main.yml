@@ -9,4 +9,10 @@
 
 - name: Install elasticsearch from repo.
   apt: pkg=elasticsearch update_cache=yes state=latest
-  notify: Restart elasticsearch
+
+- name: configure elasticsearch.yml
+  template: src=elasticsearch.yml.j2 dest=/etc/elasticsearch/elasticsearch.yml
+  notify: restart elasticsearch
+
+- name: Make sure we start elasticsearch on boot
+  service: name=elasticsearch enabled=yes

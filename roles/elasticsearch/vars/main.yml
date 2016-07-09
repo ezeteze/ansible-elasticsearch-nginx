@@ -1,3 +1,4 @@
 ---
   elasticsearch:
     version: 2.3.4
+    cluster_name: my_cluster
