@@ -1,0 +1,37 @@
+---
+- name: "Deploying public key"
+  digital_ocean:
+    state: present
+    command: ssh
+    name: "{{ digitalocean_ssh_name }}"
+    ssh_pub_key: "{{ digitalocean_ssh_pub_key }}"
+  register: do_ssh
+
+- name: "Creating droplet"
+  digital_ocean:
+    state: active
+    command: droplet
+    name: "{{ item.name }}"
+    region_id: "{{ item.region }}"
+    size_id: "{{ item.size }}"
+    image_id: "{{ item.image }}"
+    ssh_key_ids: "{{ do_ssh.ssh_key.id }}"
+    unique_name: yes
+    private_networking: yes
+    wait: yes
+    wait_timeout: 600  
+  with_items: "{{ digitalocean_droplets }}"
+  register: do
+
+- name: "Wait for port 22 to become available"
+  local_action: "wait_for port=22 host={{ item.droplet.ip_address }}"
+  with_items: "{{ do.results }}"
+
+- name: Add droplet to inventory
+  add_host: >
+    name="{{ item.droplet.name }}"
+    groups=do_hosts
+    ansible_host="{{ item.droplet.ip_address }}"
+    ansible_user=root
+  with_items: "{{ do.results }}"
+  changed_when: false

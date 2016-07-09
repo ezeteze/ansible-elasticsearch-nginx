@@ -1,0 +1,39 @@
+---
+# @see http://docs.ansible.com/ansible/digital_ocean_module.html
+# @see http://docs.ansible.com/ansible/digital_ocean_sshkey_module.html
+#
+
+# Enable or disable this role.
+digitalocean_enabled: True
+
+# DigitalOcean SSH key settings
+# -----------------------------
+# This is the human-readable display name for the given SSH key.
+digitalocean_ssh_name: "{{ lookup('env', 'USER') }}"
+# The path to the public key.
+digitalocean_ssh_pub_key: "{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
+# The path to the private key.
+digitalocean_ssh_private_key: "{{ lookup('file', '~/.ssh/id_rsa') }}"
+
+# DigitalOcean droplets settings
+# -----------------------------
+digitalocean_droplets:
+  - name: node01
+    size: 512mb
+    region: ams2
+    image: ubuntu-14-04-x64
+  
+  - name: node02
+    size: 512mb
+    region: ams2
+    image: ubuntu-14-04-x64
+
+  - name: node03
+    size: 512mb
+    region: ams2
+    image: ubuntu-14-04-x64
+
+  - name: nginx
+    size: 512mb
+    region: ams2
+    image: ubuntu-14-04-x64
