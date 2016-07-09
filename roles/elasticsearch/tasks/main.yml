@@ -10,6 +10,12 @@
 - name: Install elasticsearch from repo.
   apt: pkg=elasticsearch update_cache=yes state=latest
 
+- name: install monitor elasticsearch plugins
+  elasticsearch_plugin: name={{ item }} state=present
+  with_items:
+    - license
+    - marvel-agent
+
 - name: configure elasticsearch.yml
   template: src=elasticsearch.yml.j2 dest=/etc/elasticsearch/elasticsearch.yml
   notify: restart elasticsearch
