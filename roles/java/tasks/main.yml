@@ -18,5 +18,5 @@
 - name: Java apt packages
   apt: pkg={{ item }} update_cache=yes state=present
   with_items:
-    - oracle-java8-installer
-    - oracle-java8-set-default 
+   - oracle-java8-installer
+   - oracle-java8-set-default

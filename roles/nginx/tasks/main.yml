@@ -7,12 +7,12 @@
   apt_repository:
     repo="deb http://nginx.org/packages/{{ ansible_lsb.id|lower }}/ {{ ansible_lsb.codename }} nginx"
     update_cache=yes
-  
+
 - name: Install Nginx apt package
   apt: pkg=nginx state=latest
 
 - name: Install python-passlib
-  apt: pkg=python-passlib state=latest  
+  apt: pkg=python-passlib state=latest
 - name: Disable default servers
   file:
     path=/etc/nginx/conf.d/{{ item.path }}
@@ -26,12 +26,12 @@
   with_dict: "{{ users }}"
   tags:
     - nginx_conf
-  
+
 - name: Upload nginx config
   template: src={{ item }} dest=/etc/nginx/conf.d/{{item}}.conf
   with_items:
     - es-lb
     - kibana-default
   notify: Restart nginx
-  tags:  
-    - nginx_conf  
+  tags:
+    - nginx_conf

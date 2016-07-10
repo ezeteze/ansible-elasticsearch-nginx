@@ -1,4 +1,4 @@
----    
+---
 - name: Register Kibana apt key
   apt_key: url="https://packages.elastic.co/GPG-KEY-elasticsearch" state=present
 

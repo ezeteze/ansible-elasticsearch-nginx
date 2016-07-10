@@ -3,3 +3,5 @@
     version: 2.3.4
     cluster_name: my_cluster
     install_dir: /usr/share/elasticsearch
+    username: elastic
+    password: elastic

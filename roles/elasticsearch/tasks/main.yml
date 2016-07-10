@@ -21,6 +21,6 @@
   notify: restart elasticsearch
 - name: Start elasticsearch service
   service: name=elasticsearch state=started
-  
+
 - name: Make sure we start elasticsearch on boot
   service: name=elasticsearch enabled=yes
