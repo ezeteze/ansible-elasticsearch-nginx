@@ -65,12 +65,7 @@ network.host: [ _eth1_ , _local_ ]
 # Pass an initial list of hosts to perform discovery when new node is started:
 # The default list of hosts is ["127.0.0.1", "[::1]"]
 #
-discovery.zen.ping.unicast.hosts: [
-{% for host in groups['es-nodes'] %}
-   "{{ hostvars[host]['ansible_eth1']['ipv4']['address'] }}",
-{% endfor %}
-]
-#discovery.zen.ping.unicast.hosts: [ node01 , node02]
+discovery.zen.ping.unicast.hosts: [ {% for host in groups['es-nodes'] %} "{{ hostvars[host]['ansible_eth1']['ipv4']['address'] }}", {% endfor %} ]
 #
 # Prevent the "split brain" by configuring the majority of nodes (total number of nodes / 2 + 1):
 #
