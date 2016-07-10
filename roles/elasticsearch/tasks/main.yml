@@ -19,6 +19,8 @@
 - name: Configure elasticsearch.yml
   template: src=elasticsearch.yml.j2 dest=/etc/elasticsearch/elasticsearch.yml
   notify: restart elasticsearch
+  tags:
+    - es_conf
 
 - name: Start elasticsearch service
   service: name=elasticsearch state=started
