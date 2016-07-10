@@ -27,6 +27,7 @@
   notify: restart kibana
   tags:
     - kibana_conf
+    - auth_users
 
 - name: Start Kibana service
   service: name=kibana state=started enabled=yes

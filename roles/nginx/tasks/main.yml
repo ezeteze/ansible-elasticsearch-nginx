@@ -23,9 +23,9 @@
 
 - name: Password protect elastic cluster
   htpasswd: path=/etc/nginx/conf.d/es_passwd name={{ item.key }} password={{ item.value.password }}  owner=nginx group=nginx mode=0640
-  with_dict: "{{ users }}"
+  with_dict: "{{ http_auth_users }}"
   tags:
-    - nginx_conf
+    - auth_users
 
 - name: Upload nginx config
   template: src={{ item }} dest=/etc/nginx/conf.d/{{item}}.conf
