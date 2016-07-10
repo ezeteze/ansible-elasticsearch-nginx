@@ -25,6 +25,8 @@
 - name: Upload kibana config
   template: src=kibana.yml.j2 dest=/opt/kibana/config/kibana.yml
   notify: restart kibana
+  tags:
+    - kibana_conf
 
 - name: Start Kibana service
   service: name=kibana state=started enabled=yes

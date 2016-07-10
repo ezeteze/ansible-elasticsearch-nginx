@@ -6,5 +6,3 @@ kibana_version: 4.5.2
 kibana_port: 5601
 kibana_allowed_addresses:
   -  0.0.0.0
-elasticsearch_username: elastic
-elasticsearch_password: elastic

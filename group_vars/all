@@ -1,0 +1,6 @@
+---
+http_auth_users:
+  elastic:
+     password: elastic123
+  kibana:
+     password: kibana123
