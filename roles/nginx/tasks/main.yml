@@ -9,10 +9,10 @@
     update_cache=yes
 
 - name: Install Nginx apt package
-  apt: pkg=nginx state=latest
+  apt: pkg=nginx state=present
 
 - name: Install python-passlib
-  apt: pkg=python-passlib state=latest
+  apt: pkg=python-passlib state=present
 - name: Disable default servers
   file:
     path=/etc/nginx/conf.d/{{ item.path }}
