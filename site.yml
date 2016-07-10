@@ -1,9 +1,22 @@
 ---
+- include: digitalocean.yml
+
 # Elasticsearch Ansible Playbook
 - hosts: all
-  user: root
- 
+  remote_user: root
+  gather_facts: yes
+  tasks: []
+
+# Configure and deploy elasticsearch on elasticsearch nodes.
+- hosts: elastic
+  remote_user: root
   roles:
-    - java	
-    - elasticsearch
-    - nginx
+   - java
+   - elasticsearch
+
+# Configure nginx as es-nodes load balancer. Install kibana.
+- hosts: balancer
+  remote_user: root
+  roles:
+   - nginx
+   - kibana
