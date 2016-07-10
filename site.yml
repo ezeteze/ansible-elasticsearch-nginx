@@ -1,5 +1,6 @@
 ---
 - include: digitalocean.yml
+  when: digitalocean_enabled == 'True'
 
 # Elasticsearch Ansible Playbook
 - hosts: all
