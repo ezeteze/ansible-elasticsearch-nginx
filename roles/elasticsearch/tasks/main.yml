@@ -8,7 +8,7 @@
     update_cache=yes
 
 - name: Install elasticsearch from repo.
-  apt: pkg=elasticsearch update_cache=yes state=present
+  apt: pkg=elasticsearch update_cache=yes cache_valid_time=3600 state=present
 
 - name: install monitor elasticsearch plugins
   elasticsearch_plugin: name={{ item }} state=present
