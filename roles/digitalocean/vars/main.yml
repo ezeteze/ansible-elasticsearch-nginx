@@ -18,22 +18,22 @@ digitalocean_ssh_private_key: "{{ lookup('file', '~/.ssh/id_rsa') }}"
 # DigitalOcean droplets settings
 # -----------------------------
 digitalocean_droplets:
-  - name: node01
-    size: 512mb
-    region: fra1
-    image: ubuntu-14-04-x64
-  
-  - name: node02
+  - name: elastic-node01
     size: 512mb
     region: fra1
     image: ubuntu-14-04-x64
 
-  - name: node03
+  - name: elastic-node02
     size: 512mb
     region: fra1
     image: ubuntu-14-04-x64
 
-  - name: nginx
+  - name: elastic-node03
+    size: 512mb
+    region: fra1
+    image: ubuntu-14-04-x64
+
+  - name: balancer-nginx
     size: 2gb
     region: fra1
     image: ubuntu-14-04-x64
