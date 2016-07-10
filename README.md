@@ -1,1 +1,1 @@
-# ansible-elk
+# ansible-elastic-nginx
