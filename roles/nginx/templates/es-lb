@@ -1,6 +1,6 @@
 upstream elasticsearch {
-{% for host in groups['es-nodes'] %}
-  server {{ hostvars[host]['ansible_eth1']['ipv4']['address'] }}:9200;
+{% for host in groups['elastic'] %}
+  server {{ hostvars[host]['ansible_eth1']['ipv4']['address'] }}:{{elasticsearch.http_port}};
  {% endfor %}
   keepalive 132;
 }
