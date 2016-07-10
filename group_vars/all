@@ -1,6 +1,14 @@
 ---
+
 http_auth_users:
   elastic:
      password: elastic123
   kibana:
      password: kibana123
+
+elasticsearch:
+    version: 2.3.4
+    cluster_name: my_cluster
+    network_host: eth1
+    http_port: 9200
+    mlockall: true
