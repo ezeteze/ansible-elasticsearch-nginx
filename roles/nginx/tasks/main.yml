@@ -35,3 +35,4 @@
   notify: Restart nginx
   tags:
     - nginx_conf
+    - es_conf
