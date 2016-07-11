@@ -25,11 +25,6 @@ digitalocean_droplets:
     size: 512mb
     region: fra1
     image: ubuntu-14-04-x64
-
-  - name: elastic-node04
-    size: 512mb
-    region: fra1
-    image: ubuntu-14-04-x64
   
   - name: balancer-nginx
     size: 2gb
