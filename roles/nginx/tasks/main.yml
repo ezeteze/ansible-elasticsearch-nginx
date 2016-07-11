@@ -22,8 +22,8 @@
     - { path: 'example_ssl.conf' }
 
 - name: Password protect elastic cluster
-  htpasswd: path=/etc/nginx/conf.d/es_passwd name={{ item.key }} password={{ item.value.password }}  owner=nginx group=nginx mode=0640
-  with_dict: "{{ http_auth_users }}"
+  htpasswd: path=/etc/nginx/conf.d/es_passwd name={{ item.username }} password={{ item.password }}  owner=nginx group=nginx mode=0640
+  with_items: "{{ http_auth_users }}"
   tags:
     - auth_users
 

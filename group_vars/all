@@ -1,10 +1,9 @@
 ---
-
 http_auth_users:
-  elastic:
-     password: elastic123
-  kibana:
-     password: kibana123
+ -  username: elastic
+    password: elastic123
+ -  username: kibana
+    password: kibana123
 
 elasticsearch:
     version: 2.3.4
