@@ -1,13 +1,5 @@
 ---
-- include: digitalocean.yml
-  when: digitalocean_enabled == 'True'
-
 # Elasticsearch Ansible Playbook
-- hosts: all
-  remote_user: root
-  gather_facts: yes
-  tasks: []
-
 # Configure and deploy elasticsearch on elasticsearch nodes.
 - hosts: elastic
   remote_user: root

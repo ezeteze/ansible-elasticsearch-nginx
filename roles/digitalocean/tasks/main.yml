@@ -19,7 +19,7 @@
     unique_name: yes
     private_networking: yes
     wait: yes
-    wait_timeout: 600  
+    wait_timeout: 600
   with_items: "{{ digitalocean_droplets }}"
   register: do
 

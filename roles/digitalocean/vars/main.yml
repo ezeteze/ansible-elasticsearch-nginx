@@ -1,11 +1,4 @@
 ---
-# @see http://docs.ansible.com/ansible/digital_ocean_module.html
-# @see http://docs.ansible.com/ansible/digital_ocean_sshkey_module.html
-#
-
-# Enable or disable this role.
-digitalocean_enabled: True
-
 # DigitalOcean SSH key settings
 # -----------------------------
 # This is the human-readable display name for the given SSH key.
@@ -33,6 +26,11 @@ digitalocean_droplets:
     region: fra1
     image: ubuntu-14-04-x64
 
+  - name: elastic-node04
+    size: 512mb
+    region: fra1
+    image: ubuntu-14-04-x64
+  
   - name: balancer-nginx
     size: 2gb
     region: fra1
